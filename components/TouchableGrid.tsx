@@ -4,6 +4,8 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 type Cell ={
   col: number,
+  deltaX: number,
+  deltaY: number,
   row: number,
 }
 
@@ -19,12 +21,26 @@ export default function TouchableGrid(props: Props) {
   ROW_VALUES = []
   COL_VALUES = []
 
+  const [page, setPage] = React.useState({ pageX: 0, pageY: 0});
+
   for (let row = 1; row <= rows; row++) {
     ROW_VALUES.push(row)
   }
 
   for (let col = 1; col <= cols; col++) {
     COL_VALUES.push(col)
+  }
+
+  const _onPressIn = (event) => {
+    const { pageX, pageY } = event.nativeEvent;
+    setPage({ pageX, pageY });
+  }
+
+  const _onPress = ({ col, row }) => (event) => {
+    const { pageX, pageY } = event.nativeEvent;
+    const deltaX = page.pageX - pageX;
+    const deltaY = page.pageY - pageY;
+    onPress({ col, row, deltaX, deltaY });
   }
 
   return (
@@ -36,7 +52,8 @@ export default function TouchableGrid(props: Props) {
               return (
                 <TouchableOpacity
                   key={`cell_${rowIndex}_${colIndex}`}
-                  onPress={onPress({ col: colValue, row: rowValue })}
+                  onPress={_onPress({ col: colValue, row: rowValue })}
+                  onPressIn={_onPressIn}
                   style={[styles.cell, { backgroundColor: `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})` }]}
                 >
                   <Text>{colValue} X {rowValue}</Text>
