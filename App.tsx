@@ -4,8 +4,8 @@ import { StyleSheet, Text, View } from 'react-native';
 import TouchableGrid from './components/TouchableGrid';
 
 export default function App() {
-  const onPress = ({ col, row, deltaX, deltaY }) => {
-    console.log("DEBUG::TouchableGrid::_handlePress::col_and_row:", col, row, deltaX, deltaY)
+  const onPress = ({ col, row, radians }) => {
+    console.log("DEBUG::TouchableGrid::_handlePress::col_and_row_and_radians:", col, row, radians)
   }
 
   return (

@@ -6,6 +6,7 @@ type Cell ={
   col: number,
   deltaX: number,
   deltaY: number,
+  radians: number,
   row: number,
 }
 
@@ -40,7 +41,8 @@ export default function TouchableGrid(props: Props) {
     const { pageX, pageY } = event.nativeEvent;
     const deltaX = page.pageX - pageX;
     const deltaY = page.pageY - pageY;
-    onPress({ col, row, deltaX, deltaY });
+    const radians = Math.atan2(deltaY, deltaX)
+    onPress({ col, row, deltaX, deltaY, radians });
   }
 
   return (
