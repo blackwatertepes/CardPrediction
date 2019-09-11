@@ -1,12 +1,47 @@
 import React, { useState } from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 
-export default function TintedImage({ imageSource }) {
+export default function TintedImage({ imageSource, lightness, temperature }) {
+  const WIDTH = 375;
+  const HEIGHT = 500;
+
+  const red = (l, t) => {
+    if (l > 0) {
+      return 255 - 255 * t * -1;
+    } else {
+      return 100 * t;
+    }
+  }
+
+  const green = (l, t) => {
+    if (l > 0) {
+      return 255 - 255 * t;
+    } else {
+      return 0;
+    }
+  }
+
+  const blue = (l, t) => {
+    if (l > 0) {
+      return 255 - 255 * t;
+    } else {
+      return 50 * t * -1;
+    }
+  }
+
+  const alpha = (l) => {
+    return Math.abs(l);
+  }
+
+  const tintColor = () => {
+    // return 'hsla(360, 100%, 80%, 0.8)';
+    return `rgba(${red(lightness, temperature)}, ${green(lightness, temperature)}, ${blue(lightness, temperature)}, ${alpha(lightness, temperature)})`;
+  }
 
   return (
     <View style={styles.container}>
-      <Image style={[styles.image, { width: 375, height: 500 }]} source={imageSource} />
-      <Image style={[styles.image, { tintColor: 'rgba(200, 200, 200, 0.2)', width: 375, height: 500 }]} source={imageSource} />
+      <Image style={[styles.image, { width: WIDTH, height: HEIGHT }]} source={imageSource} />
+      <Image style={[styles.image, { tintColor: tintColor(), width: WIDTH, height: HEIGHT }]} source={imageSource} />
     </View>
   );
 }
