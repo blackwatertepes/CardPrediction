@@ -4,11 +4,11 @@ import { Image, StyleSheet, View } from 'react-native';
 import Pan from './Pan';
 import TintedImage from './TintedImage';
 
-type Props {
+type Props = {
   imageSource: React.Element,
 }
 
-export default function PanTintImage({ imageSource }: Props) {
+export default function PanTintImage({ imageSource, onSetTint }: Props) {
   const [lightness, setLightness] = useState(0);
   const [temp, setTemp] = useState(0);
 
@@ -16,6 +16,8 @@ export default function PanTintImage({ imageSource }: Props) {
     setLightness(dy * -0.01);
     setTemp(dx * -0.01);
   }
+
+  // TODO: Implement the onSetTint callback
 
   return (
     <View style={styles.container}>

@@ -1,17 +1,15 @@
 import React from 'react';
-import { Button, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import * as ImagePicker from "expo-image-picker";
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
 
-export default class ImagePickerExample extends React.Component {
-  state = {
-    image: null,
-  };
+type Props = {
+  onImage: Function,
+}
 
+export default class CameraRoll extends React.Component<Props, State> {
   render() {
-    let { image } = this.state;
-
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Button
@@ -22,8 +20,6 @@ export default class ImagePickerExample extends React.Component {
           title="Take an photo with the camera"
           onPress={this._pickCamera}
         />
-        {image &&
-          <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
       </View>
     );
   }
@@ -42,30 +38,30 @@ export default class ImagePickerExample extends React.Component {
   }
 
   _pickImage = async () => {
+    const { onImage } = this.props;
+
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
       aspect: [4, 3],
     });
 
-    console.log(result);
-
     if (!result.cancelled) {
-      this.setState({ image: result.uri });
+      onImage(result.uri);
     }
   };
 
   _pickCamera = async () => {
+    const { onImage } = this.props;
+
     let result = await ImagePicker.launchCameraAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
       aspect: [4, 3],
     });
 
-    console.log(result);
-
     if (!result.cancelled) {
-      this.setState({ image: result.uri });
+      onImage(result.uri);
     }
   };
 }

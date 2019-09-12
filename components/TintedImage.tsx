@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Dimensions, Image, StyleSheet, View } from 'react-native';
 
 export default function TintedImage({ imageSource, lightness, temperature }) {
@@ -37,6 +37,7 @@ export default function TintedImage({ imageSource, lightness, temperature }) {
     // return 'hsla(360, 100%, 80%, 0.8)';
     return `rgba(${red(lightness, temperature)}, ${green(lightness, temperature)}, ${blue(lightness, temperature)}, ${alpha(lightness, temperature)})`;
   }
+  console.log("TintedImage:", imageSource);
 
   return (
     <View style={styles.container}>
