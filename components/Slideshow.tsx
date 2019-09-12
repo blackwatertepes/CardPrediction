@@ -2,22 +2,24 @@ import React from 'react';
 import { Dimensions, StyleSheet, Text, View } from 'react-native';
 
 type Props = {
-  backImageUrl?: string,
-  frontImageUrl?: string,
+  backImage?: React.Element,
+  frontImage?: React.Element,
+  info?: string,
   offset?: number,
 }
 
-export default function Slideshow({ backImageUrl, frontImageUrl, offset }: Props) {
+export default function Slideshow({ backImage, frontImage, info, offset }: Props) {
+  const WIDTH = Dimensions.get('window').width;
 
   return (
     <View style={[styles.container, styles.centered]}>
       <View style={[styles.container, styles.slideBack]}>
-        <Text>{backImageUrl}</Text>
+        {backImage}
+        <Text>Back: {info}</Text>
       </View>
-      <View style={[styles.container, styles.slideFront]} left={offset}>
-        {frontImageUrl && (
-          <Text>{frontImageUrl}</Text>
-        )}
+      <View style={[styles.container, styles.slideFront]} left={-WIDTH + offset}>
+        {frontImage}
+        <Text>Front: {info}</Text>
       </View>
       <Text>Offset: {offset}</Text>
     </View>
@@ -36,9 +38,9 @@ const styles = StyleSheet.create({
     top: 20,
   },
   slideBack: {
-    backgroundColor: `rgb(200, ${Math.random() * 200 + 50}, 200)`,
+    backgroundColor: `rgb(255, 200, 200)`,
   },
   slideFront: {
-    backgroundColor: `rgb(${Math.random() * 200 + 50}, 200, 200)`,
+    backgroundColor: `rgb(200, 255, 200)`,
   },
 });

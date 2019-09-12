@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Dimensions, StyleSheet, View } from 'react-native';
 
 import Pan from './Pan';
 import Slideshow from './Slideshow';
 
-export default function PanningSlideshow() {
+type Props = {
+  backImage?: React.Element,
+  frontImage?: React.Element,
+}
+
+export default function PanningSlideshow({ backImage, frontImage }: Props) {
   const [slideX, setSlideX] = useState(0);
   const [suit, setSuit] = useState('');
   const [value, setValue] = useState(0);
@@ -78,12 +83,12 @@ export default function PanningSlideshow() {
 
   const onUp = ({ dx, dy }) => {
     // TODO: Animate the frontImage sliding right
-    setSlideX(375);
+    setSlideX(Dimensions.get('window').width);
   }
 
   return (
     <View style={styles.container}>
-      <Slideshow backImageUrl={cardString({ value, suit })} offset={slideX} />
+      <Slideshow backImage={backImage} frontImage={frontImage} info={cardString({ value, suit })} offset={slideX} />
       <Pan cols={COLS} onDown={onDown} onMove={onMove} onUp={onUp} rows={ROWS} />
     </View>
   );

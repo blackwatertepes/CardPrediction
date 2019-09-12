@@ -4,7 +4,11 @@ import { Image, StyleSheet, View } from 'react-native';
 import Pan from './Pan';
 import TintedImage from './TintedImage';
 
-export default function PanTintImage({ imageSource }) {
+type Props {
+  imageSource: React.Element,
+}
+
+export default function PanTintImage({ imageSource }: Props) {
   const [lightness, setLightness] = useState(0);
   const [temp, setTemp] = useState(0);
 

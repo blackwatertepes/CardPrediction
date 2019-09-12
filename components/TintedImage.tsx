@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Image, StyleSheet, View } from 'react-native';
+import { Dimensions, Image, StyleSheet, View } from 'react-native';
 
 export default function TintedImage({ imageSource, lightness, temperature }) {
-  const WIDTH = 375;
+  const WIDTH = Dimensions.get('window').width;
   const HEIGHT = 500;
 
   const red = (l, t) => {
