@@ -17,7 +17,7 @@ export default function PanningSlideshow({ backImage, frontImage }: Props) {
   const ROWS = 5;
 
   const setSuitFromRadians = (radians: number) => {
-    const delta = 0.5;
+    const delta = 0.4;
     if (radians < 0) {
       if (radians < -delta) {
         setSuit('diamonds')
