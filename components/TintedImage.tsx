@@ -1,7 +1,7 @@
 import React from 'react';
 import { Dimensions, Image, StyleSheet, View } from 'react-native';
 
-export default function TintedImage({ imageSource, lightness, temperature }) {
+export default function TintedImage({ children, imageSource, lightness, temperature }) {
   const WIDTH = Dimensions.get('window').width;
   const HEIGHT = 500;
 
@@ -37,10 +37,10 @@ export default function TintedImage({ imageSource, lightness, temperature }) {
     // return 'hsla(360, 100%, 80%, 0.8)';
     return `rgba(${red(lightness, temperature)}, ${green(lightness, temperature)}, ${blue(lightness, temperature)}, ${alpha(lightness, temperature)})`;
   }
-  console.log("TintedImage:", imageSource);
 
   return (
     <View style={styles.container}>
+      {children}
       <Image style={[styles.image, { width: WIDTH, height: HEIGHT }]} source={imageSource} />
       <Image style={[styles.image, { tintColor: tintColor(), width: WIDTH, height: HEIGHT }]} source={imageSource} />
     </View>

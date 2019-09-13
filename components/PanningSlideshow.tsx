@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Dimensions, StyleSheet, View } from 'react-native';
+import { Dimensions, StyleSheet, Text, View } from 'react-native';
 
 import Pan from './Pan';
 import Slideshow from './Slideshow';
@@ -88,8 +88,9 @@ export default function PanningSlideshow({ backImage, frontImage }: Props) {
 
   return (
     <View style={styles.container}>
-      <Slideshow backImage={backImage} frontImage={frontImage} info={cardString({ value, suit })} offset={slideX} />
+      <Slideshow backImage={backImage} frontImage={frontImage} offset={slideX} />
       <Pan cols={COLS} onDown={onDown} onMove={onMove} onUp={onUp} rows={ROWS} />
+      <Text>{cardString({ value, suit })}</Text>
     </View>
   );
 }

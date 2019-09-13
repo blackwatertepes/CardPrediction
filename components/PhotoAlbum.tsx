@@ -5,21 +5,21 @@ import PanningSlideshow from './PanningSlideshow';
 import TintedImage from './TintedImage';
 
 type Props = {
-  backImage: React.Element,
+  photo: string,
   tintProps: any, // TODO
 }
 
-export default function PhotoAlbum({ backImage: backImageUri, tintProps }: Props) {
+export default function PhotoAlbum({ photo, tintProps }: Props) {
   const WIDTH = Dimensions.get('window').width;
   const HEIGHT = Dimensions.get('window').height;
   const PHOTO_SOURCE = require('./../assets/photos/test.jpg');
   const IMAGE_SOURCE = require('./../assets/cards/2_c.png');
 
   const backImage = (<Image blurRadius={1} style={[styles.photo, { width: 1600, height: 1600 }]} source={PHOTO_SOURCE} />);
-  // TODO: Pass in the tintProps
-  // TODO: Back with the backImageUri Image
   const frontImage = (
-    <TintedImage imageSource={IMAGE_SOURCE} lightness={0} temperature={0} />
+    <TintedImage imageSource={IMAGE_SOURCE} {...tintProps} >
+      <Image source={{ uri: photo }} style={{ width: WIDTH, height: HEIGHT }} />
+    </TintedImage>
   );
 
   return (
