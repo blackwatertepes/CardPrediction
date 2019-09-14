@@ -5,6 +5,40 @@ import CameraRoll from './components/CameraRoll';
 import PanTintImage from './components/PanTintImage';
 import PhotoAlbum from './components/PhotoAlbum';
 
+import {
+  Grayscale,
+  Sepia,
+  Tint,
+  ColorMatrix,
+  concatColorMatrices,
+  invert,
+  contrast,
+  saturate
+} from 'react-native-color-matrix-image-filters';
+
+const GrayscaledImage = (image) => (
+  <Grayscale>
+    {image}
+  </Grayscale>
+);
+
+const CombinedFiltersImage = (image) => (
+  <Tint amount={1.25}>
+    <Sepia>
+      {image}
+    </Sepia>
+  </Tint>
+);
+
+const ColorMatrixImage = (image) => (
+  <ColorMatrix
+    matrix={concatColorMatrices([saturate(-0.9), contrast(5.2), invert()])}
+    // alt: matrix={[saturate(-0.9), contrast(5.2), invert()]}
+  >
+  {image}
+  </ColorMatrix>
+);
+
 export default function App() {
   // These DEFAULT's should be blank, unless testing...
   const DEFAULT_PHOTO = "file:///Users/tylerkuhn/Library/Developer/CoreSimulator/Devices/5B41CCFE-0DA7-41C1-87DC-01F2185AE649/data/Containers/Data/Application/02EBC67B-D987-4D90-BECF-96B6035FBA08/Library/Caches/ExponentExperienceData/%2540anonymous%252FCardPrediction-c56a9b05-98a8-4810-a762-20c07adf667b/ImagePicker/C1BDE950-FCD4-45D2-A689-C7D44208D154.jpg"
@@ -33,7 +67,7 @@ export default function App() {
       )}
       {!!photo && !tintProps && (
         <PanTintImage imageSource={IMAGE_SOURCE} onSetTint={onSetTint} >
-          <Image source={{ uri: photo }} style={{ width: WIDTH, height: HEIGHT }} />
+          {GrayscaledImage(<Image source={{ uri: photo }} style={{ width: WIDTH, height: HEIGHT }} />)}
         </PanTintImage>
       )}
       {!!photo && !!tintProps && (
