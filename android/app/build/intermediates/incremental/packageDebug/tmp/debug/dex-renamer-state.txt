@@ -1,4 +1,4 @@
-#Mon Nov 04 20:21:41 PST 2019
+#Mon Nov 04 21:31:04 PST 2019
 base.1=/Users/tylerkuhn/Github/CardPrediction/android/app/build/intermediates/transforms/dexMerger/debug/0
 path.1=classes.dex
 base.0=/Users/tylerkuhn/Github/CardPrediction/android/app/build/intermediates/transforms/dexMerger/debug/1

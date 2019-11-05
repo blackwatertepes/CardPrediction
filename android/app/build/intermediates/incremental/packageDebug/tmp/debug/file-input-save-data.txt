@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Mon Nov 04 20:21:42 PST 2019
+#Mon Nov 04 21:31:05 PST 2019
 23.set=NATIVE_RESOURCE
 31.set=NATIVE_RESOURCE
 33.base=/Users/tylerkuhn/Github/CardPrediction/android/app/build/intermediates/transforms/mergeJniLibs/debug/0
