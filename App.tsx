@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Dimensions, Image, StyleSheet, View } from 'react-native';
 
-import CameraRoll from './components/CameraRoll';
 import PanTintImage from './components/PanTintImage';
 import PhotoAlbum from './components/PhotoAlbum';
 
@@ -28,9 +27,6 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      {!photo && (
-        <CameraRoll onImage={onImage} />
-      )}
       {!!photo && !tintProps && (
         <PanTintImage imageSource={IMAGE_SOURCE} onSetTint={onSetTint} >
           <Image source={{ uri: photo }} style={{ width: WIDTH, height: HEIGHT }} />
