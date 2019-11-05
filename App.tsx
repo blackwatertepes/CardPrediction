@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Dimensions, Image, StyleSheet, View } from 'react-native';
+import { StatusBar } from 'react-native';
 
 import PanTintImage from './components/PanTintImage';
 import PhotoAlbum from './components/PhotoAlbum';
@@ -27,6 +28,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
+      <StatusBar hidden={true} />
       {!!photo && !tintProps && (
         <PanTintImage imageSource={IMAGE_SOURCE} onSetTint={onSetTint} >
           <Image source={{ uri: photo }} style={{ width: WIDTH, height: HEIGHT }} />
